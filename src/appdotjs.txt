@@ -1,0 +1,305 @@
+import React, { Component } from 'react';
+
+// L -13
+
+class RegularClass {};
+class ComponentClass extends RegularClass {};
+
+const regularClassInstance = new RegularClass();
+const componentClassInstance = new ComponentClass();
+
+console.log('regularClassInstance', regularClassInstance);
+console.log('componentClassInstance', componentClassInstance);
+
+// L-13 END -------------------------------------------------------------------------
+
+// component based approach of creating a component
+class App extends Component {
+    // render method is where we define the structure of the component. Similar to an react element the component is also created using the jsx
+    // it can consists of many elements nested together or side by side. 
+    render() {
+        return (
+            <div>
+                <h1> Hello </h1>
+                <p> My name is Vamshee. I'm a Software Engineer.</p>
+                <p> I'm always looking forward to working on meaningful projects.</p>
+            </div>
+        );
+    }
+} 
+
+// function App {} // -- Functional based approach modern way of creating a component
+
+
+-------------------------------------------EOF--------------------------------------------------------
+// At the end of the file make sure that you export this app file so that other files in this application can access this app component.
+export default App;
+
+==============================================================================================================================
+
+// L-14
+import React, { Component } from "react";
+
+class App extends Component {
+    // L-14 ------------------------------------------------------------
+  constructor() {
+    super();
+    this.state = { displayBio: false };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> Hello </h1>
+        <p> My name is Vamshee. I'm a Software Engineer.</p>
+        <p> I'm always looking forward to working on meaningful projects.</p>
+        {/* L-14 ------------------------------------------------------------------------------*/} 
+        {this.state.displayBio ? (
+          <div>
+            <p> I live in Hyderabad, India and I code every day.</p>
+            <p>
+              My Favourite language is JavaScript, and I think React.js is
+              Awesome.
+            </p>
+            <p> Besides coding, I also love music and running. </p>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+}
+
+export default App;
+==========L-15=============================================
+import React, { Component } from "react";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { displayBio: false };
+
+    // this.readMore = this.readMore.bind(this);
+    this.toggleDisplayBio = this.toggleDisplayBio.bind(this);
+  }
+
+  //   readMore() {
+  //     this.setState({ displayBio: true });
+  //   }
+  //   showLess() {
+  //     this.setState({ display: false });
+  //   }
+
+//   REACT Law: Never directly modify the state.
+  toggleDisplayBio() {
+    this.setState({ displayBio: !this.state.displayBio });
+  }
+  render() {
+    return (
+      <div>
+        <h1> Hello </h1>
+        <p> My name is Vamshee. I'm a Software Engineer.</p>
+        <p> I'm always looking forward to working on meaningful projects.</p>
+        {this.state.displayBio ? (
+          <div>
+            <p> I live in Hyderabad, India and I code every day.</p>
+            <p>
+              My Favourite language is JavaScript, and I think React.js is
+              Awesome.
+            </p>
+            <p> Besides coding, I also love music and running. </p>
+            <button onClick={this.toggleDisplayBio}> Show less </button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={this.toggleDisplayBio}>Read more</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+============================END L-15==========================================================
+
+==================// Lec 16=-============================
+import React, { Component } from "react";
+
+// Lec 16
+// conclusions: 1) NEVER DIRECTLY MODIFY THE STATE, if your intention is for changes to occur in the render method based on updated state values.
+// the reason is the setState() method after completing execution it RERUNS the render() method to display the new Updated values to the display.
+
+// 2) On the onclick handler we refer to the Method Name itself and not with parenthesis.
+// The reason is it will get into a infinite loop. MAXIMUM UPDATE DEPTH EXCEEDED.
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { displayBio: false };
+
+    // we are passing 'this' to the function defined in the class, using this we are able to use the functions
+    // this.readMore = this.readMore.bind(this);
+    this.toggleDisplayBio = this.toggleDisplayBio.bind(this);
+  }
+  //   REACT Law: Never directly modify the state.
+
+  //   this.state.displayBio = !this.state.displayBio; // Bad practice; directly updating
+
+  toggleDisplayBio() {
+    //   this.state.displayBio = !this.state.displayBio; // doen work
+    this.setState({ displayBio: !this.state.displayBio });
+  }
+  render() {
+    return (
+      <div>
+        <h1> Hello </h1>
+        <p> My name is Vamshee. I'm a Software Engineer.</p>
+        <p> I'm always looking forward to working on meaningful projects.</p>
+        {this.state.displayBio ? (
+          <div>
+            <p> I live in Hyderabad, India and I code every day.</p>
+            <p>
+              My Favourite language is JavaScript, and I think React.js is
+              Awesome.
+            </p>
+            <p> Besides coding, I also love music and running. </p>
+            <button onClick={this.toggleDisplayBio}> Show less </button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={this.toggleDisplayBio}>Read more</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+============================END ==============================================
+
+import React, { Component } from "react";
+
+class App extends Component {
+  // =======================L-17=====================
+  // constructor() {
+  //   super();
+  //   this.state = { displayBio: false };
+
+  //   console.log("Component this", this);
+
+  //   this.toggleDisplayBio = this.toggleDisplayBio.bind(this);
+  // }
+  // toggleDisplayBio() {
+  //   this.setState({ displayBio: !this.state.displayBio });
+  // }
+
+  // The above can also be written/Refactored as
+
+  state = { displayBio: false };
+
+  toggleDisplayBio = () => {
+    this.setState({ displayBio: !this.state.displayBio });
+  };
+  render() {
+    return (
+      <div>
+        <h1> Hello </h1>
+        <p> My name is Vamshee. I'm a Software Engineer.</p>
+        <p> I'm always looking forward to working on meaningful projects.</p>
+        {this.state.displayBio ? (
+          <div>
+            <p> I live in Hyderabad, India and I code every day.</p>
+            <p>
+              My Favourite language is JavaScript, and I think React.js is
+              Awesome.
+            </p>
+            <p> Besides coding, I also love music and running. </p>
+            <button onClick={this.toggleDisplayBio}> Show less </button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={this.toggleDisplayBio}>Read more</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+export default App;
+
+=========================================================================================================================
+
+FILE: Project.js L- 18 
+
+import React, { Component } from "react";
+import PROJECTS from "./data/projects";
+
+class Projects extends Component {
+  render() {
+    return (
+      <div>
+        <h2>Highlighted Projects</h2>
+        <div>
+          {/* <div>{PROJECTS[0].title}</div>
+          <div>{PROJECTS[1].title}</div>
+          <div>{PROJECTS[2].title}</div> */}
+          {/* more efficient code */}
+          {PROJECTS.map((PROJECT) => {
+            return <div key={PROJECT.id}>{PROJECT.title} </div>;
+          })}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Projects;
+
+========================L- 19 =================================================================
+
+import React, { Component } from "react";
+import PROJECTS from "./data/projects";
+
+class Project extends Component {
+  render() {
+    // console.log("this.props", this.props);
+    // return <div>{this.props.project.title}</div>;
+
+    // Rather than reaching into this.props that project to access each value every time we can make local conostants foro each of these values in the render method by using JavaScript destructuring Syntax.
+    const { title, image, description, link } = this.props.project;
+
+    return (
+      <div style={{ display: "inline-block", width: 300, margin: 10 }}>
+        <h3>{title}</h3>
+        <img src={image} alt="image" style={{ width: 200, height: 120 }} />
+        <p>{description}</p>
+        <a href={link}>{link}</a>
+      </div>
+    );
+  }
+}
+
+class Projects extends Component {
+  render() {
+    return (
+      <div>
+        <h2>Highlighted Projects</h2>
+        <div>
+          {/* <div>{PROJECTS[0].title}</div>
+          <div>{PROJECTS[1].title}</div>
+          <div>{PROJECTS[2].title}</div> */}
+          {/* more efficient code */}
+          {PROJECTS.map((PROJECT) => {
+            return <Project key={PROJECT.id} project={PROJECT} />;
+          })}
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Projects;
