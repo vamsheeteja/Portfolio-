@@ -11,17 +11,17 @@ const SOCIAL_PROFILES = [
   },
   {
     id: 2,
-    link: "github-link",
+    link: "https://github.com/vamsheeteja",
     image: githubIcon,
   },
   {
     id: 3,
-    link: "linkedin-link",
+    link: "https://www.linkedin.com/in/vamshee-teja-798a45183/",
     image: linkedinIcon,
   },
   {
     id: 4,
-    link: "twitter-link",
+    link: "https://twitter.com/vamshee_teja-link",
     image: twitterIcon,
   },
 ];

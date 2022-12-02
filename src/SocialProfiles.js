@@ -7,7 +7,7 @@ class SocialProfile extends Component {
 
     return (
       <div style={{ display: "inline-block", margin: 10 }}>
-        <a href={link}>
+        <a href={link} target="_blank">
           <img
             src={image}
             alt="social-profile"

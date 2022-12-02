@@ -14,7 +14,7 @@ class App extends Component {
       <div>
         <img src={profile} alt="profile-pic" className="profile" />
         <h1> Hello! </h1>
-        <p> My name is Vamshee. I'm a Software Engineer.</p>
+        <p> My name is Vamshee Teja. I'm a Software Engineer.</p>
         <p> I'm always looking forward to working on meaningful projects.</p>
         {this.state.displayBio ? (
           <div>
